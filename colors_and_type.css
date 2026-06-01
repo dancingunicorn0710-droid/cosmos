@@ -1,0 +1,281 @@
+/* =====================================================================
+   cosmos — colors_and_type.css
+   Single source of truth for color tokens, type stack, and semantic
+   text styles. Import this into any page in the system.
+
+   Palette is the official "Color Setting" board:
+     Singularity Black · Stardust Ivory  (surfaces)
+     Pale Pulsar · Lunar Aurora · Martian Dust  (line accents)
+     Nebula Lilac · Galactic Moss · Solar Flare  (line tints)
+
+   Each line also has its own typeface — see "per-line typography".
+   ===================================================================== */
+
+/* ---------- Fonts ----------
+   Wanted Sans Variable — brand sans (used everywhere by default,
+   and as vessel's line typeface). 100 – 950 axis.
+
+   Cormorant Garamond Italic — terra's line typeface (loaded from Google).
+   DM Serif Display          — cocoon's line typeface (loaded from Google).
+   See <head> of any page using line wordmarks for the @import.
+*/
+@font-face {
+  font-family: "Wanted Sans";
+  src: url("./fonts/WantedSansVariable.woff2") format("woff2-variations"),
+       url("./fonts/WantedSansVariable.woff2") format("woff2"),
+       url("./fonts/WantedSansVariable.ttf")   format("truetype-variations"),
+       url("./fonts/WantedSansVariable.ttf")   format("truetype");
+  font-weight: 100 950;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ====== Brand palette — official Color Setting ====== */
+  --singularity-black: #27282a;     /* dark base surface + primary ink */
+  --stardust-ivory:    #fff8e9;     /* cream base surface */
+
+  --pale-pulsar:   #88a3ca;          /* vessel · saturated mid blue */
+  --lunar-aurora:  #86d6a2;          /* terra  · saturated mint */
+  --martian-dust:  #ff946b;          /* cocoon · saturated coral */
+
+  --nebula-lilac:  #d5ccda;          /* vessel tint */
+  --galactic-moss: #d3eabe;          /* terra  tint */
+  --solar-flare:   #fbcca3;          /* cocoon tint */
+
+  /* ====== Semantic surfaces ====== */
+  --bg:        var(--stardust-ivory);
+  --bg-deep:   #f3ead2;              /* deeper cream — section bands on ivory */
+  --paper:     #fffcf3;              /* highest surface */
+  --ink:       var(--singularity-black);
+
+  /* dark-mode counterpart (the brand uses both light & dark fluidly) */
+  --bg-dark:        var(--singularity-black);
+  --bg-dark-deep:   #1d1e20;
+  --ink-on-dark:    var(--stardust-ivory);
+
+  /* ====== Ink ladder (over ink) — opacity stops for hierarchy ====== */
+  --ink-90:    rgba(39, 40, 42, 0.90);
+  --ink-72:    rgba(39, 40, 42, 0.72);
+  --ink-60:    rgba(39, 40, 42, 0.60);
+  --ink-45:    rgba(39, 40, 42, 0.45);
+  --ink-30:    rgba(39, 40, 42, 0.30);
+  --ink-18:    rgba(39, 40, 42, 0.18);
+  --ink-15:    rgba(39, 40, 42, 0.15);
+  --ink-08:    rgba(39, 40, 42, 0.08);
+  --ink-04:    rgba(39, 40, 42, 0.04);
+
+  /* ====== Ivory ladder (over ivory) — for text on dark surfaces ====== */
+  --ivory-90:  rgba(255, 248, 233, 0.90);
+  --ivory-72:  rgba(255, 248, 233, 0.72);
+  --ivory-60:  rgba(255, 248, 233, 0.60);
+  --ivory-30:  rgba(255, 248, 233, 0.30);
+  --ivory-18:  rgba(255, 248, 233, 0.18);
+  --ivory-08:  rgba(255, 248, 233, 0.08);
+
+  /* ====== Line aliases (used across the system) ====== */
+  --vessel:         var(--pale-pulsar);
+  --terra:          var(--lunar-aurora);
+  --cocoon:         var(--martian-dust);
+  --vessel-tint:    var(--nebula-lilac);
+  --terra-tint:     var(--galactic-moss);
+  --cocoon-tint:    var(--solar-flare);
+
+  /* line page surfaces — gentle washes for line-themed sections */
+  --vessel-surface: #eff2f8;
+  --terra-surface:  #eff7e8;
+  --cocoon-surface: #fff0e2;
+
+  /* ====== Type families ====== */
+  --font-sans:   "Wanted Sans", "Apple SD Gothic Neo", "Pretendard",
+                 -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 system-ui, sans-serif;
+  --font-mono:   "JetBrains Mono", ui-monospace, SFMono-Regular,
+                 Menlo, Consolas, monospace;
+
+  /* per-line typefaces — wired in via Google Fonts at page level.
+     Always paired with the line's accent color. */
+  --font-vessel: "Wanted Sans", system-ui, sans-serif;
+  --font-terra:  "Cormorant Garamond", "Times New Roman", serif;
+  --font-cocoon: "DM Serif Display", "Times New Roman", serif;
+
+  /* ====== Spacing scale ====== */
+  --s-1: 2px;   --s-2: 4px;   --s-3: 8px;   --s-4: 12px; --s-5: 16px;
+  --s-6: 20px;  --s-7: 28px;  --s-8: 40px;  --s-9: 56px; --s-10: 80px;
+
+  /* ====== Radii — kept tight ====== */
+  --r-0: 0px; --r-1: 2px; --r-2: 4px; --r-3: 8px; --r-pill: 999px;
+
+  /* ====== Hairlines & elevation ====== */
+  --line:       1px solid var(--ink-18);
+  --line-faint: 1px solid var(--ink-08);
+  --shadow-1: 0 1px 2px rgba(39, 40, 42, 0.04);
+  --shadow-2: 0 4px 16px -6px rgba(39, 40, 42, 0.10);
+  --shadow-3: 0 16px 48px -16px rgba(39, 40, 42, 0.18);
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--bg);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =====================================================================
+   Semantic type
+   ===================================================================== */
+
+/* ----- Display ----- */
+.t-line-name {                              /* 48px line wordmark (catalog) */
+  font-family: var(--font-sans);
+  font-weight: 350;
+  font-size: 48px;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+}
+
+.t-display {
+  font-family: var(--font-sans);
+  font-weight: 350;
+  font-size: 72px;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+/* ----- Per-line wordmark presets ----- */
+.t-vessel {                                 /* vessel — humanist sans */
+  font-family: var(--font-vessel);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--pale-pulsar);
+  text-transform: lowercase;
+}
+.t-terra {                                  /* terra — italic serif */
+  font-family: var(--font-terra);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0;
+  color: var(--lunar-aurora);
+  text-transform: lowercase;
+}
+.t-cocoon {                                 /* cocoon — rounded display serif */
+  font-family: var(--font-cocoon);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--martian-dust);
+  text-transform: lowercase;
+}
+
+/* ----- Headings ----- */
+h1, .t-h1 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 40px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0;
+}
+h2, .t-h2 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  margin: 0;
+}
+h3, .t-h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* ----- Editorial micro ----- */
+.t-wordmark {
+  font-family: var(--font-sans);
+  font-weight: 550;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.t-cap-name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.t-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+.t-meta {
+  font-family: var(--font-sans);
+  font-weight: 450;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+/* ----- Body ----- */
+p, .t-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.55;
+  letter-spacing: 0.002em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+.t-body-lg {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.t-body-sm {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-60);
+}
+.t-catalog-en {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.45;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+}
+.t-catalog-kr {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  color: var(--ink-60);
+}
+
+code, .t-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+/* ----- Helper: import in any page <head> to get the line typefaces ----- */
+/* <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="stylesheet"
+     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&family=DM+Serif+Display&display=swap"> */
